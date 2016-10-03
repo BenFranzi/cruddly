@@ -3,14 +3,14 @@ var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient
 var app = express();
 
-var port = 3000;
+app.set('port', (process.env.PORT || 3000));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 
 MongoClient.connect('mongodb://lelz:lolz@ds015995.mlab.com:15995/cruddly', (err, database) => {
   if (err) return console.log(err);
   db = database;
-  app.listen(3000, function() {
+  app.listen(app.get('port'), function() {
     console.log(`running on 0.0.0.0:${port}`);
   });
 });
