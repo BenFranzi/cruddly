@@ -11,7 +11,7 @@ MongoClient.connect('mongodb://lelz:lolz@ds015995.mlab.com:15995/cruddly', (err,
   if (err) return console.log(err);
   db = database;
   app.listen(app.get('port'), function() {
-    console.log(`running on 0.0.0.0:${port}`);
+    console.log(`running on 0.0.0.0:${app.get('port')}`);
   });
 });
 app.get('/', (req, res) => {
