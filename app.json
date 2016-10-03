@@ -1,0 +1,7 @@
+{
+  "name": "Cruddly",
+  "description": "The worlds cruddiest twitter written in express and friends",
+  "repository": "https://github.com/BenFranzi/cruddly",
+  "logo": "https://node-js-sample.herokuapp.com/node.png",
+  "keywords": ["node", "express", "static"]
+}
