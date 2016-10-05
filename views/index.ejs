@@ -2,11 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Cruddly - The worlds worst Twitter clone</title>
+  <title>Cruddly - The worlds worst address book</title>
 </head>
 <style>
   .quote > span:first-child {
     font-weight: bold;
+  }
+  .quote > span:nth-child(2) {
+    color: red;
+  }
+  .quote > span:last-child {
+    color: blue;
   }
 </style>
 <body>
@@ -16,14 +22,18 @@
   <% for(var i=0; i<quotes.length; i++) {%>
     <li class="quote">
       <span><%= quotes[i].name %></span>
-      <span><%= quotes[i].quote %></span>
+      <span><%= quotes[i].address %></span>
+      <span><%= quotes[i].postcode %></span>
+      <span><%= quotes[i].phone %></span>
     </li>
   <% } %>
   </ul>
 
   <form action="/quotes" method="POST">
     <input type="text" placeholder="name" name="name">
-    <input type="text" placeholder="quote" name="quote">
+    <input type="text" placeholder="address" name="address">
+    <input type="text" placeholder="postcode" name="postcode">
+    <input type="text" placeholder="phone" name="phone">
     <button type="submit">Submit</button>
   </form>
 </body>
