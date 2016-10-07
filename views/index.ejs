@@ -18,20 +18,48 @@
 <body>
   <h2>CRUDDLY - just add friends (or foes, it's all the same)</h2>
 
-  <ul class="quotes">
+  <ul class="bay">
   <%var count = 0%>
-  <% for(var i=0; i<quotes.length; i++) { %>
+  <% for(var i=0; i<bay.length; i++) { %>
     <% count += 1 %>
     <li class="quote">
-      <span><%= quotes[i].bayId %></span>
-      <span><%= quotes[i].trolley %></span>
-      <span><%= quotes[i].in %></span>
-      <span><%= quotes[i].out %></span>
+      <span><%= bay[i] %></span>
+      <span><%= bay[i].trolley %></span>
+      <span><%= bay[i].in %></span>
+      <span><%= bay[i].out %></span>
     </li>
   <% } %>
   </ul>
+  <% count = bay %>
   <h1>Trolleys in bay: <%= count %></h1>
-
+  <ul class="bay2">
+  <%var count2 = 0%>
+  <% for(var i=0; i<bay2.length; i++) { %>
+    <% count2 += 1 %>
+    <li class="quote">
+      <span><%= bay2 %></span>
+      <span><%= bay2[i].trolley %></span>
+      <span><%= bay2[i].in %></span>
+      <span><%= bay2[i].out %></span>
+    </li>
+  <% } %>
+  </ul>
+    <% count2 = bay2 %>
+  <h1>Trolleys in bay: <%= count2 %></h1>
+  <ul class="bay3">
+  <%var count3 = 0%>
+  <% for(var i=0; i<bay3.length; i++) { %>
+    <% count3 += 1 %>
+    <li class="quote">
+      <span><%= bay3[i] %></span>
+      <span><%= bay3[i].trolley %></span>
+      <span><%= bay3[i].in %></span>
+      <span><%= bay3[i].out %></span>
+    </li>
+  <% } %>
+  </ul>
+  <% count3 = bay3 %>
+  <h1>Trolleys in bay: <%= count3 %></h1>
 
 </body>
 </html>
