@@ -17,11 +17,15 @@ MongoClient.connect('mongodb://localhost/store', (err, database) => {
 
 
 
+app.get('/', function(req, res){
+  res.render("login.ejs");
+});
+
 
 
 var collectionCount = [];
 var collectionsArray;
-app.get('/', function(req, res){
+app.get('/trolleys', function(req, res){
     db.listCollections().toArray(function(err, collections){
         collectionsArray = collections;
       function getNumber(i,bay) {
@@ -45,13 +49,4 @@ app.get('/', function(req, res){
         bay: collectionCount
       });
     });
-
-      // function workyabastard() {
-      //   console.log(collectionCount);
-      //   console.log(collectionsArray);
-      //   res.render('index.ejs', {
-      //     bay: collectionCount
-      //   });
-      // }
-      // setTimeout(workyabastard, 500);
   });

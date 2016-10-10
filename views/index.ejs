@@ -27,6 +27,11 @@
     margin-left: auto;
     margin-right: auto;
   }
+  .center_table {
+    margin-left: 250px;
+    margin-right: auto;
+  }
+
   .trolley_no {
     position: relative;
     left: 50%;
@@ -45,9 +50,11 @@
         <li><h2 style="color: white; padding: 0 10 0 0;">Live Trolleys</h2>/li>
     </ul>
   </nav>
-  <table class="center_it" style="width:50%">
+  <div class="center_table">
+  <table class="container panel panel-default" style="width:90% position: fixed;">
    <tr>
-     <th><div id="bay1"><%- bay[0] %></div></th>
+     <th><div id="bay1"><%- bay[0] %></div>
+    </th>
      <th><div id="bay2"><%- bay[1] %></div></th>
      <th><div id="bay3"><%- bay[2] %></div></th>
    </tr>
@@ -61,8 +68,7 @@
     <div id="n_bay3"></div>
    </th>
   </table>
-
-
+</div>
 </body>
 <script>
   function set_wheel( max, div_name) {
