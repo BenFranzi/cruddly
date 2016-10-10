@@ -1,0 +1,6 @@
+<li class="quote">
+  <span><%= bay[i] %></span>
+  <span><%= bay[i].trolley %></span>
+  <span><%= bay[i].in %></span>
+  <span><%= bay[i].out %></span>
+</li>

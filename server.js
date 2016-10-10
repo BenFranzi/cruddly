@@ -7,7 +7,7 @@ app.set('port', (process.env.PORT || 3000));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 
-MongoClient.connect('mongodb://localhost/trolleysystem', (err, database) => {
+MongoClient.connect('mongodb://localhost/store', (err, database) => {
   if (err) return console.log(err);
   db = database;
   app.listen(app.get('port'), function() {
@@ -19,48 +19,31 @@ MongoClient.connect('mongodb://localhost/trolleysystem', (err, database) => {
 
 
 
-var collectionOne = 0;
-var collectionTwo = 0;
-var collectionThree = 0;
+var collectionCount = []
+var collectionsArray;
 app.get('/', function(req, res){
-      db.collection("b1", function(err, collection) {
-      collection.find({"out": "x"}).toArray(function(err, result) {
+    db.listCollections().toArray(function(err, collections){
+        collectionsArray = collections;
+    });
+
+      db.collection("ultimo", function(err, collection) {
+      collection.find({"bay": "apple", "out": "x"}).toArray(function(err, result) {
         if (err) {
           throw err;
         } else {
-          for (i=0; i<result.length; i++) {
-          }
-          collectionOne = i;
+          for (i=0; i<result.length; i++) {}
+          collectionCount[0] = i;
         }
       });
-      db.collection("b2", function(err, collection) {
-        collection.find({"out": "x"}).toArray(function(err, result) {
-          if (err) {
-            throw err;
-          } else {
-            for (i=0; i<result.length; i++) {}
-            collectionTwo = i;
-          }
-        });
-      });
-      db.collection("b3", function(err, collection) {
-        collection.find({"out": "x"}).toArray(function(err, result) {
-          if (err) {
-            throw err;
-          } else {
-            for (i=0; i<result.length; i++) {}
-            collectionThree = i;
-          }
-        });
-      });
       // Thank you aesed
-      function workyabastard() {console.log(collectionOne+":"+collectionTwo +":"+collectionThree);
-      res.render('index.ejs', {
-        bay: collectionOne,
-        bay2: collectionTwo,
-        bay3: collectionThree
-      });}
-            setTimeout(workyabastard, 3000);
+      function workyabastard() {
+        console.log(collectionCount);
+        console.log(collectionsArray);
+        res.render('index.ejs', {
+        bay: collectionCount
+        });
+      }
+        setTimeout(workyabastard, 1000);
     });
   });
 
