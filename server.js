@@ -19,54 +19,39 @@ MongoClient.connect('mongodb://localhost/store', (err, database) => {
 
 
 
-var collectionCount = []
+var collectionCount = [];
 var collectionsArray;
 app.get('/', function(req, res){
     db.listCollections().toArray(function(err, collections){
         collectionsArray = collections;
-    });
-
-      db.collection("ultimo", function(err, collection) {
-      collection.find({"bay": "apple", "out": "x"}).toArray(function(err, result) {
-        if (err) {
-          throw err;
-        } else {
-          for (i=0; i<result.length; i++) {}
-          collectionCount[0] = i;
-        }
-      });
-      // Thank you aesed
-      function workyabastard() {
-        console.log(collectionCount);
-        console.log(collectionsArray);
-        res.render('index.ejs', {
-        bay: collectionCount
-        });
+      function getNumber(i,bay) {
+        var x;
+        db.collection("ultimo", function(err, collection) {
+            collection.find({"bay": bay, "out": "x"}).toArray(function(err, result) {
+              if (err) {
+                throw err;
+              } else {
+                x=result.length;
+              }
+              collectionCount[i] = x;
+            });
+          });
+        return x;
       }
-        setTimeout(workyabastard, 1000);
+      getNumber(0, "pear");
+      getNumber(1, "apple");
+      getNumber(2, "banana");
+      res.render('index.ejs', {
+        bay: collectionCount
+      });
     });
+
+      // function workyabastard() {
+      //   console.log(collectionCount);
+      //   console.log(collectionsArray);
+      //   res.render('index.ejs', {
+      //     bay: collectionCount
+      //   });
+      // }
+      // setTimeout(workyabastard, 500);
   });
-
-
-
-
-// app.get('/', (req, res) => {
-//
-//
-//   //db.listCollections().toArray(function(err, collInfos) {
-//       // collInfos is an array of collection info objects that look like:
-//       // { name: 'test', options: {} }
-//   //});
-//   var elements = [];
-//   db.collection("b1", function(err, collection) {
-//     collection.find({"out": "x"}).toArray(function(err, result) {
-//       res.render('index.ejs', {bay: result});
-//     });
-//   });
-//   db.collection("b2", function(err, collection) {
-//     collection.find({"out": "x"}).toArray(function(err, result) {
-//       res.render('index.ejs', {bay2: result, bay3: result});
-//     });
-//   });
-// //  res.render('index.ejs', {bay: elements});
-// });

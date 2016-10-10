@@ -2,35 +2,105 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Cruddly - The worlds worst address book</title>
+  <title>Cruddly</title>
+  <script
+			  src="http://code.jquery.com/jquery-3.1.1.min.js"
+			  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+			  crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/1.0.0/dist/progressbar.js"></script>
 </head>
 <style>
-  .quote > span:first-child {
-    font-weight: bold;
+  div {
+    margin: 20px;
+    width: 200px;
+    height: 200px;
+    position: relative;
   }
-  .quote > span:nth-child(2) {
-    color: red;
-  }
-  .quote > span:last-child {
+  .bay {
     color: blue;
+    font-size: 90px;
+
+  }
+  .center_it {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .trolley_no {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    padding: 0px;
+    margin: 0px;
+    transform: translate(-50%, -50%);
+     color: rgb(170, 170, 170);
+     font-family: &quot;Raleway&quot;,Helvetica,sans-serif;
+    font-size: 2rem;
   }
 </style>
 <body>
-  <h2>CRUDDLY - just add friends (or foes, it's all the same)</h2>
+  <nav class="navbar navbar-inverse center_it" style="width: 95%;">
+    <ul class="nav navbar-nav center_it">
+        <li><h2 style="color: white; padding: 0 10 0 0;">Live Trolleys</h2>/li>
+    </ul>
+  </nav>
+  <table class="center_it" style="width:50%">
+   <tr>
+     <th><div id="bay1"><%- bay[0] %></div></th>
+     <th><div id="bay2"><%- bay[1] %></div></th>
+     <th><div id="bay3"><%- bay[2] %></div></th>
+   </tr>
+   <th><div id="t_bay1"><%- bay[0] %> trolleys</div><br>
+    <div id="n_bay1"></div>
+   </th>
+   <th><div id="t_bay2"><%- bay[1] %> trolleys</div><br>
+    <div id="n_bay2"></div>
+   </th>
+   <th><div id="t_bay3"><%- bay[2] %> trolleys</div><br>
+    <div id="n_bay3"></div>
+   </th>
+  </table>
 
-  <ul class="bay">
-  <%var count = 0%>
-  <% for(var i=0; i<bay.length; i++) { %>
-    <% count += 1 %>
-    <li class="quote">
-      <span><%= bay[i] %></span>
-      <span><%= bay[i].trolley %></span>
-      <span><%= bay[i].in %></span>
-      <span><%= bay[i].out %></span>
-    </li>
-  <% } %>
-  </ul>
-  <% count = bay %>
 
 </body>
+<script>
+  function set_wheel( max, div_name) {
+  get_val = parseInt(document.getElementById(div_name).innerHTML);
+  document.getElementById(div_name).innerHTML = "";
+
+  if (get_val > max) {
+    get_val = "EXCEED"
+  }
+  var bar = new ProgressBar.Circle(document.getElementById(div_name), {
+    color: '#aaa',
+    // This has to be the same size as the maximum width to
+    // prevent clipping
+    strokeWidth: 4,
+    trailWidth: 1,
+    easing: 'easeInOut',
+    duration: 1400,
+    text: {
+      autoStyleContainer: false
+  },
+    from: { color: '#FF0000', width: 2 },
+
+    to: { color: '#00FF00', width: 3 },
+    // Set default step function for all animate calls
+    step: function(state, circle) {
+      circle.path.setAttribute('stroke', state.color);
+      circle.path.setAttribute('stroke-width', state.width);
+      circle.setText(div_name);
+    }
+  });
+  bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
+  bar.text.style.fontSize = '2rem';
+  bar.text.style.position = 'relative';
+
+  bar.animate(get_val/max);
+  }
+  set_wheel(6, "bay1");
+  set_wheel(6, "bay2");
+  set_wheel(6, "bay3");
+</script>
 </html>
